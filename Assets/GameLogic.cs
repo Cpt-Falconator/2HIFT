@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class GameLogic : MonoBehaviour
 {
 
-    public Image topPanel, bottomPanel;
+    public Image topPanel, topMiddlePanel, bottomMiddlePanel, bottomPanel;
     public float shiftTimer;
     private float timer;
     private int state;
@@ -13,7 +13,10 @@ public class GameLogic : MonoBehaviour
     void Start()
     {
         topPanel.color = Color.white;
+        topMiddlePanel.color = Color.black;
+        bottomMiddlePanel.color = Color.white;
         bottomPanel.color = Color.black;
+
         timer = 0;
         state = 0;
     }
@@ -27,15 +30,19 @@ public class GameLogic : MonoBehaviour
             {
                 case 0:
                     state = 1;
-                    topPanel.color = Color.black;
-                    bottomPanel.color = Color.white;
+                    topPanel.color = Color.white;
+                    topMiddlePanel.color = Color.black;
+                    bottomMiddlePanel.color = Color.white;
+                    bottomPanel.color = Color.black;
                     timer = 0;
                     break;
 
                 case 1:
                     state = 0;
-                    topPanel.color = Color.white;
-                    bottomPanel.color = Color.black;
+                    topPanel.color = Color.black;
+                    topMiddlePanel.color = Color.white;
+                    bottomMiddlePanel.color = Color.black;
+                    bottomPanel.color = Color.white;
                     timer = 0;
                     break;
 
