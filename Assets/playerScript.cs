@@ -28,19 +28,22 @@ public class playerScript : MonoBehaviour
         switch (playerPosition)
         {
             case Positions.Top:
-                playerSprite.transform.localPosition.Set(10, 170, 0);
+                playerSprite.rectTransform.localPosition = new Vector3(-390, 170, 0);
                 break;
 
             case Positions.TopMiddle:
-                playerSprite.transform.localPosition.Set(10, 55, 0);
+                playerSprite.rectTransform.localPosition = new Vector3(-390, 55, 0);
+
                 break;
 
             case Positions.BottomMiddle:
-                playerSprite.transform.localPosition.Set(10, -55, 0);
+                playerSprite.rectTransform.localPosition = new Vector3(-390, -55, 0);
+
                 break;
 
             case Positions.Bottom:
-                playerSprite.transform.localPosition.Set(10, -170, 0);
+                playerSprite.rectTransform.localPosition = new Vector3(-390, -170, 0);
+
                 break;
         }
 
