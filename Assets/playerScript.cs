@@ -4,45 +4,104 @@ using UnityEngine;
 using UnityEngine.UI;
 public class playerScript : MonoBehaviour
 {
-    enum Positions
+    public enum Lane
     {
-        Top,
-        TopMiddle,
-        BottomMiddle,
-        Bottom
+        Bottom, BottomMiddle, TopMiddle, Top
     }
-    //Position 0 = Up, 1 = Down;
-    Positions playerPosition;
+    enum Inversion
+    {
+        Lower, Upper
+    }
+    
+    Inversion playerOrientation;
+    public Lane playerPosition;
     public Image playerSprite;
+    public GameObject topPanel, topMiddlePanel, bottomMiddlePanel, bottomPanel;
+    public GameObject bulletPrefab;
+    float SHOTCOOLDOWN = 3.0f;
+    bool shotReady;
     // Start is called before the first frame update
     void Start()
     {
-        playerPosition = Positions.TopMiddle;
+        playerPosition = Lane.TopMiddle;
+        playerOrientation = Inversion.Lower;
+        shotReady = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if (!shotReady)
+        {
+            SHOTCOOLDOWN -= Time.deltaTime * 1;
+        }
+        if (SHOTCOOLDOWN <= 0)
+        {
+            shotReady = true;
+        }
+
         InputCheck();
 
         switch (playerPosition)
         {
-            case Positions.Top:
-                playerSprite.rectTransform.localPosition = new Vector3(-390, 170, 0);
+            case Lane.Top:
+                switch(playerOrientation)
+                {
+                    case Inversion.Upper:
+                        playerSprite.rectTransform.localPosition = new Vector3(-470, topPanel.GetComponent<LanePositions>().upperCoord, 0);
+                        
+                        break;
+
+                    case Inversion.Lower:
+                        playerSprite.rectTransform.localPosition = new Vector3(-470, topPanel.GetComponent<LanePositions>().lowerCoord, 0);
+                        break;
+                }
+                
                 break;
 
-            case Positions.TopMiddle:
-                playerSprite.rectTransform.localPosition = new Vector3(-390, 55, 0);
+            case Lane.TopMiddle:
+                switch (playerOrientation)
+                {
+                    case Inversion.Upper:
+                        playerSprite.rectTransform.localPosition = new Vector3(-470, topMiddlePanel.GetComponent<LanePositions>().upperCoord, 0);
+
+                        break;
+
+                    case Inversion.Lower:
+                        playerSprite.rectTransform.localPosition = new Vector3(-470, topMiddlePanel.GetComponent<LanePositions>().lowerCoord, 0);
+                        break;
+                }
 
                 break;
 
-            case Positions.BottomMiddle:
-                playerSprite.rectTransform.localPosition = new Vector3(-390, -55, 0);
+            case Lane.BottomMiddle:
+                switch (playerOrientation)
+                {
+                    case Inversion.Upper:
+                        playerSprite.rectTransform.localPosition = new Vector3(-470, bottomMiddlePanel.GetComponent<LanePositions>().upperCoord, 0);
+
+                        break;
+
+                    case Inversion.Lower:
+                        playerSprite.rectTransform.localPosition = new Vector3(-470, bottomMiddlePanel.GetComponent<LanePositions>().lowerCoord, 0);
+                        break;
+                }
 
                 break;
 
-            case Positions.Bottom:
-                playerSprite.rectTransform.localPosition = new Vector3(-390, -170, 0);
+            case Lane.Bottom:
+                switch (playerOrientation)
+                {
+                    case Inversion.Upper:
+                        playerSprite.rectTransform.localPosition = new Vector3(-470, bottomPanel.GetComponent<LanePositions>().upperCoord, 0);
+
+                        break;
+
+                    case Inversion.Lower:
+                        playerSprite.rectTransform.localPosition = new Vector3(-470, bottomPanel.GetComponent<LanePositions>().lowerCoord, 0);
+                        break;
+                }
 
                 break;
         }
@@ -52,56 +111,56 @@ public class playerScript : MonoBehaviour
 
     void InputCheck()
     {
-        //Left Shift moves the player up the scale
+        //Left Shift moves the player up
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            switch (playerPosition)
+            switch (playerOrientation)
             {
-                case Positions.Top:
-                    //Already at top, do nothing.
+                case Inversion.Lower:
+                    playerOrientation = Inversion.Upper;
                     break;
 
-                case Positions.TopMiddle:
-                    playerPosition = Positions.Top;
-                    break;
-
-                case Positions.BottomMiddle:
-                    playerPosition = Positions.TopMiddle;
-                    break;
-
-                case Positions.Bottom:
-                    playerPosition = Positions.BottomMiddle;
+                case Inversion.Upper:
+                    if (playerPosition != Lane.Top)
+                    {
+                        playerOrientation = Inversion.Lower;
+                        playerPosition += 1;
+                    }
                     break;
             }
         }
 
-        //Right Shift moves the player down the scale
+        //Right Shift moves the player down
         if (Input.GetKeyDown(KeyCode.RightShift))
         {
-            switch (playerPosition)
+            switch (playerOrientation)
             {
-                case Positions.Top:
-                    playerPosition = Positions.TopMiddle;
+                case Inversion.Lower:
+                    if (playerPosition != Lane.Bottom)
+                    {
+                        playerOrientation = Inversion.Upper;
+                        playerPosition -= 1;
+                    }
+                    
                     break;
 
-                case Positions.TopMiddle:
-                    playerPosition = Positions.BottomMiddle;
+                case Inversion.Upper:
+                    playerOrientation = Inversion.Lower;
                     break;
 
-                case Positions.BottomMiddle:
-                    playerPosition = Positions.Bottom;
-                    break;
-
-                case Positions.Bottom:
-                    //Already at bottom, do nothing.
-                    break;
+             
             }
         }
 
-        //Case for jumping / action... May end up being firing a beam of some sort to clear obstacles.
+        //Case for action... May end up being firing a beam of some sort to clear obstacles.
         if (Input.GetKeyDown(KeyCode.Space))
         {
-           
+            if (shotReady)
+            {
+                Instantiate(bulletPrefab, transform.parent);
+                SHOTCOOLDOWN = 3;
+                shotReady = false;
+            }
         }
     }
 }

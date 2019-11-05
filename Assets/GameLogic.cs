@@ -49,6 +49,6 @@ public class GameLogic : MonoBehaviour
             }
             
         }
-        timer += 1 * Time.deltaTime;
+      //  timer += 1 * Time.deltaTime;
     }
 }
