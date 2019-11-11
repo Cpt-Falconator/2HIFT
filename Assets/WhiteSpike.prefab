@@ -84,6 +84,7 @@ GameObject:
   - component: {fileID: 8780366704265238632}
   - component: {fileID: 4677935813609809921}
   - component: {fileID: 6647141181344974488}
+  - component: {fileID: 3026594435151960349}
   m_Layer: 5
   m_Name: WhiteSpike
   m_TagString: Untagged
@@ -138,3 +139,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hazard: 1
   breakable: 0
+--- !u!68 &3026594435151960349
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5384588080119724130}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0.18
+  m_Points:
+  - {x: 0, y: 24}
+  - {x: -24, y: -24}
+  - {x: 24, y: -24}
+  - {x: 0, y: 24}

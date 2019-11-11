@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5082750661902600754
 RectTransform:
   m_ObjectHideFlags: 0
@@ -83,6 +83,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2908381674549956062}
   - component: {fileID: 5669037339748837996}
+  - component: {fileID: 3115871369507903187}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -121,6 +122,22 @@ MonoBehaviour:
   blackBullet: {fileID: 3479800903975461191}
   whiteBullet: {fileID: 8348334060990077541}
   speed: 3
+--- !u!58 &3115871369507903187
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4227063041490465115}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 48, y: 0}
+  serializedVersion: 2
+  m_Radius: 2
 --- !u!1 &8348334060990077541
 GameObject:
   m_ObjectHideFlags: 0
