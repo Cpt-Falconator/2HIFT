@@ -430,7 +430,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -603,7 +603,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -725,7 +725,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -815,7 +815,16 @@ MonoBehaviour:
   topMiddlePanel: {fileID: 2074429853}
   bottomMiddlePanel: {fileID: 759526157}
   bottomPanel: {fileID: 856161656}
-  shiftTimer: 0.3
+  blackWall: {fileID: 6237291582898338894, guid: 2b820845883a1dc45b1da13690aa466e,
+    type: 3}
+  whiteWall: {fileID: 3842097885751667720, guid: a2cd4b6900eda744081ef3362cc24d79,
+    type: 3}
+  blackSpike: {fileID: 2895011332547241556, guid: 33bd8ff64842e004698baaaccd2e30c0,
+    type: 3}
+  whiteSpike: {fileID: 5384588080119724130, guid: d336cab20efb7174a9b3a04b98bb4d65,
+    type: 3}
+  spawnTimer: 0.25
+  timer: 0
 --- !u!1 &2074429851
 GameObject:
   m_ObjectHideFlags: 0
@@ -867,7 +876,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

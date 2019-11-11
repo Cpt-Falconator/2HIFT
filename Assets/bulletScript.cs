@@ -33,7 +33,10 @@ public class bulletScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
         this.transform.position = new Vector3(transform.position.x + (Time.deltaTime * speed), transform.position.y, transform.position.z);
+        if(transform.localPosition.x >= 550.0f)
+        {
+            Destroy(gameObject);
+        }
     }
 }
