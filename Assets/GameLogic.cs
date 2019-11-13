@@ -36,7 +36,7 @@ public class GameLogic : MonoBehaviour
     {
        if(timer >= spawnTimer)
         {
-            switch (Random.Range(0, 3))
+            switch (Random.Range(0, 4))
             {
                 case 0:
                     CreateWall("BLACK");
@@ -110,7 +110,7 @@ public class GameLogic : MonoBehaviour
                     {
                         spike = Instantiate(blackSpike, transform);
                         spike.transform.Rotate(new Vector3(180, 0, 0));
-                        spike.transform.position = new Vector3(500.0f, topPanel.GetComponent<LanePositions>().upperCoord + 5, 0.0f);
+                        spike.transform.position = new Vector3(500.0f, topPanel.GetComponent<LanePositions>().upperCoord - 5, 0.0f);
                     }
                     else
                     {
@@ -130,7 +130,7 @@ public class GameLogic : MonoBehaviour
                     else
                     {
                         spike = Instantiate(blackSpike, transform);
-                        spike.transform.position = new Vector3(500.0f, bottomMiddlePanel.GetComponent<LanePositions>().lowerCoord - 5, 0.0f);
+                        spike.transform.position = new Vector3(500.0f, bottomMiddlePanel.GetComponent<LanePositions>().lowerCoord + 5, 0.0f);
                     }
                 }
                 break;
@@ -142,7 +142,7 @@ public class GameLogic : MonoBehaviour
                     {
                         spike = Instantiate(whiteSpike, transform);
                         spike.transform.Rotate(new Vector3(180, 0, 0));
-                        spike.transform.position = new Vector3(500.0f, topMiddlePanel.GetComponent<LanePositions>().upperCoord + 5, 0.0f);
+                        spike.transform.position = new Vector3(500.0f, topMiddlePanel.GetComponent<LanePositions>().upperCoord - 5, 0.0f);
                     }
                     else
                     {
@@ -162,7 +162,7 @@ public class GameLogic : MonoBehaviour
                     else
                     {
                         spike = Instantiate(whiteSpike, transform);
-                        spike.transform.position = new Vector3(500.0f, bottomPanel.GetComponent<LanePositions>().lowerCoord - 5, 0.0f);
+                        spike.transform.position = new Vector3(500.0f, bottomPanel.GetComponent<LanePositions>().lowerCoord + 5, 0.0f);
                     }
                 }
                 break;

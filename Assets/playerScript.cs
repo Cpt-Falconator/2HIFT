@@ -21,6 +21,7 @@ public class playerScript : MonoBehaviour
     float SHOTCOOLDOWN = 3.0f;
     bool shotReady;
     // Start is called before the first frame update
+
     void Start()
     {
         playerPosition = Lane.TopMiddle;
