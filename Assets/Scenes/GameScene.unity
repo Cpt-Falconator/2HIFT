@@ -863,8 +863,13 @@ MonoBehaviour:
     type: 3}
   whiteSpike: {fileID: 5384588080119724130, guid: d336cab20efb7174a9b3a04b98bb4d65,
     type: 3}
-  spawnTimer: 0.25
-  timer: 0
+  crystalPickup: {fileID: 2588192604096760548, guid: 0fa1a6eda5a35454cba04798c7ec22ef,
+    type: 3}
+  hazardSpawnTimer: 0
+  hazardSpawnInterval: 0.25
+  crystalSpawnTimer: 0
+  crystalSpawnInterval: 5
+  scrollSpeed: 2.5
 --- !u!1 &2074429851
 GameObject:
   m_ObjectHideFlags: 0

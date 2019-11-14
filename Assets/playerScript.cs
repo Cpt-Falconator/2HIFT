@@ -33,14 +33,14 @@ public class playerScript : MonoBehaviour
     void Update()
     {
 
-        if (!shotReady)
-        {
-            SHOTCOOLDOWN -= Time.deltaTime * 1;
-        }
-        if (SHOTCOOLDOWN <= 0)
-        {
-            shotReady = true;
-        }
+        //if (!shotReady)
+        //{
+        //    SHOTCOOLDOWN -= Time.deltaTime * 1;
+        //}
+        //if (SHOTCOOLDOWN <= 0)
+        //{
+        //    shotReady = true;
+        //}
 
         InputCheck();
 
@@ -108,6 +108,11 @@ public class playerScript : MonoBehaviour
         }
 
 
+    }
+
+   public void ArmBullet()
+    {
+        shotReady = true;
     }
 
     void InputCheck()

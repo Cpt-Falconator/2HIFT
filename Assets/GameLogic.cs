@@ -17,8 +17,17 @@ public class GameLogic : MonoBehaviour
     public GameObject whiteSpike;
 
     [Header("Misc")]
-    public float spawnTimer;
-    public float timer;
+    public GameObject crystalPickup;
+    public float hazardSpawnTimer;
+    public float hazardSpawnInterval;
+    public float crystalSpawnTimer;
+    public float crystalSpawnInterval;
+    public float scrollSpeed;
+    public int score;
+    public float timeSurvived;
+
+    private bool playing;
+
 
     // Start is called before the first frame update
     void Start()
@@ -28,13 +37,47 @@ public class GameLogic : MonoBehaviour
         bottomMiddlePanel.color = Color.white;
         bottomPanel.color = Color.black;
 
-        timer = 0;
+        hazardSpawnTimer = 0;
+        crystalSpawnTimer = 0;
+        playing = true;
+    }
+
+    private void Awake()
+    {
+        timeSurvived = 0.0f;
+        score = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-       if(timer >= spawnTimer)
+        if (playing)
+        {
+            HazardSpawner();
+            CrystalSpawner();
+
+            hazardSpawnTimer += 1 * Time.deltaTime;
+            crystalSpawnTimer += 1 * Time.deltaTime;
+            timeSurvived += 1 * Time.deltaTime;
+        }
+    }
+
+    public void IncreaseSpeed()
+    {
+        hazardSpawnInterval -= 0.01f;
+        scrollSpeed += 0.3f;
+        score++;
+    }
+
+    public void EndGame()
+    {
+        playing = false;
+        scrollSpeed = 0;
+    }
+
+    void HazardSpawner()
+    {
+        if (hazardSpawnTimer >= hazardSpawnInterval)
         {
             switch (Random.Range(0, 4))
             {
@@ -55,9 +98,66 @@ public class GameLogic : MonoBehaviour
                     break;
 
             }
-            timer = 0;
+            hazardSpawnTimer = 0;
         }
-        timer += 1 * Time.deltaTime;
+    }
+
+    void CrystalSpawner()
+    {
+        int spawnLane = Random.Range(0,2);
+        GameObject crystal;
+        if (crystalSpawnTimer >= crystalSpawnInterval)
+        {
+            crystal = Instantiate(crystalPickup, transform);
+            switch (Random.Range(0, 4))
+            {
+                case 0:
+                    if(spawnLane == 0)
+                    {
+                        crystal.transform.position = new Vector3(500.0f, topPanel.GetComponent<LanePositions>().upperCoord - 5, 0.0f);
+                    }
+                    else
+                    {
+                        crystal.transform.position = new Vector3(500.0f, topPanel.GetComponent<LanePositions>().lowerCoord + 5, 0.0f);
+                    }
+                    break;
+
+                case 1:
+                    if (spawnLane == 0)
+                    {
+                        crystal.transform.position = new Vector3(500.0f, topMiddlePanel.GetComponent<LanePositions>().upperCoord - 5, 0.0f);
+                    }
+                    else
+                    {
+                        crystal.transform.position = new Vector3(500.0f, topMiddlePanel.GetComponent<LanePositions>().lowerCoord + 5, 0.0f);
+                    }
+                    break;
+
+                case 2:
+                    if (spawnLane == 0)
+                    {
+                        crystal.transform.position = new Vector3(500.0f, bottomMiddlePanel.GetComponent<LanePositions>().upperCoord + 5, 0.0f);
+                    }
+                    else
+                    {
+                        crystal.transform.position = new Vector3(500.0f, bottomMiddlePanel.GetComponent<LanePositions>().lowerCoord - 5, 0.0f);
+                    }
+                    break;
+
+                case 3:
+                    if (spawnLane == 0)
+                    {
+                        crystal.transform.position = new Vector3(500.0f, bottomPanel.GetComponent<LanePositions>().upperCoord + 5, 0.0f);
+                    }
+                    else
+                    {
+                        crystal.transform.position = new Vector3(500.0f, bottomPanel.GetComponent<LanePositions>().lowerCoord - 5, 0.0f);
+                    }
+                    break;
+
+            }
+            crystalSpawnTimer = 0;
+        }
     }
 
     void CreateWall(string COLOUR)

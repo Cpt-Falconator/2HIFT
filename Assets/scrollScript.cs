@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class scrollScript : MonoBehaviour
 {
-    public float speed;
+    float speed;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,11 +13,12 @@ public class scrollScript : MonoBehaviour
 
     private void Awake()
     {
-        
+        speed = GetComponentInParent<GameLogic>().scrollSpeed;
     }
     // Update is called once per frame
     void Update()
     {
+        speed = GetComponentInParent<GameLogic>().scrollSpeed;
         this.transform.position = new Vector3(transform.position.x - (Time.deltaTime * speed), transform.position.y, transform.position.z);
         if (transform.localPosition.x <= -550.0f)
         {
