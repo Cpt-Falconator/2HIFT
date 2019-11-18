@@ -19,6 +19,7 @@ public class GameLogic : MonoBehaviour
     [Header("Audio")]
     public AudioSource audioSource;
     public synthesiser synth;
+    public AudioClip BulletFire, PickupCrystal, GameOver, WallBreak;
 
     [Header("Misc")]
     public GameObject crystalPickup;
@@ -44,8 +45,30 @@ public class GameLogic : MonoBehaviour
         hazardSpawnTimer = 0;
         crystalSpawnTimer = 0;
         playing = true;
-    }
 
+        //Amplifies sound of gameover, was too quiet in engine
+        float[] samplesGO = new float[GameOver.samples];
+        GameOver.GetData(samplesGO, 0);
+
+        for (int i = 0; i < samplesGO.Length; i++)
+        {
+            samplesGO[i] *= 5.0f;
+        }
+        GameOver.SetData(samplesGO, 0);
+
+
+        //Reverses the pickup sound. (Reversing it in engine because only at end of development I thought it sounded better)
+        float[] samplesCG = new float[PickupCrystal.samples];
+        float[] samplesCGRev = new float[samplesCG.Length];
+        PickupCrystal.GetData(samplesCG, 0);
+
+        for (int i = 0; i < samplesCG.Length; i++)
+        {
+            samplesCGRev[samplesCG.Length - (i+1)] = samplesCG[i];
+        }
+        PickupCrystal.SetData(samplesCGRev, 0);
+    }
+    
     private void Awake()
     {
         timeSurvived = 0.0f;
@@ -71,10 +94,14 @@ public class GameLogic : MonoBehaviour
         hazardSpawnInterval -= 0.01f;
         scrollSpeed += 0.3f;
         score++;
+        audioSource.PlayOneShot(PickupCrystal, 6.0f);
     }
 
     public void EndGame()
     {
+        audioSource.Stop();
+        audioSource.Play();
+        audioSource.PlayOneShot(GameOver, 1.0f);
         playing = false;
         scrollSpeed = 0;
     }
@@ -175,13 +202,13 @@ public class GameLogic : MonoBehaviour
                 {
                     wall = Instantiate(blackWall, transform);
                     wall.transform.position = new Vector3(500.0f, 150.0f, 0.0f);
-                    audioSource.PlayOneShot(synth.eNote, 1.0f);
+                    audioSource.PlayOneShot(synth.eNote, 0.1f);
                 }
                 else
                 {
                     wall = Instantiate(blackWall, transform);
                     wall.transform.position = new Vector3(500.0f, -50.0f, 0.0f);
-                    audioSource.PlayOneShot(synth.aNote, 1.0f);
+                    audioSource.PlayOneShot(synth.aNote, 0.1f);
                 }
                 break;
 
@@ -190,13 +217,13 @@ public class GameLogic : MonoBehaviour
                 {
                     wall = Instantiate(whiteWall, transform);
                     wall.transform.position = new Vector3(500.0f, 50.0f, 0.0f);
-                    audioSource.PlayOneShot(synth.cNote, 1.0f);
+                    audioSource.PlayOneShot(synth.cNote, 0.1f);
                 }
                 else
                 {
                     wall = Instantiate(whiteWall, transform);
                     wall.transform.position = new Vector3(500.0f, -150.0f, 0.0f);
-                    audioSource.PlayOneShot(synth.fNote, 1.0f);
+                    audioSource.PlayOneShot(synth.fNote, 0.1f);
                 }
                 break;
         }
@@ -219,13 +246,13 @@ public class GameLogic : MonoBehaviour
                         spike = Instantiate(blackSpike, transform);
                         spike.transform.Rotate(new Vector3(180, 0, 0));
                         spike.transform.position = new Vector3(500.0f, topPanel.GetComponent<LanePositions>().upperCoord - 5, 0.0f);
-                        audioSource.PlayOneShot(synth.fNote, 0.5f);
+                        audioSource.PlayOneShot(synth.fNote, 0.1f);
                     }
                     else
                     {
                         spike = Instantiate(blackSpike, transform);
                         spike.transform.position = new Vector3(500.0f, topPanel.GetComponent<LanePositions>().lowerCoord + 5, 0.0f);
-                        audioSource.PlayOneShot(synth.dNote, 1.0f);
+                        audioSource.PlayOneShot(synth.dNote, 0.1f);
                     }
 
                 }
@@ -236,13 +263,13 @@ public class GameLogic : MonoBehaviour
                         spike = Instantiate(blackSpike, transform);
                         spike.transform.Rotate(new Vector3(180, 0, 0));
                         spike.transform.position = new Vector3(500.0f, bottomMiddlePanel.GetComponent<LanePositions>().upperCoord - 5, 0.0f);
-                        audioSource.PlayOneShot(synth.bNote, 1.0f);
+                        audioSource.PlayOneShot(synth.bNote, 0.1f);
                     }
                     else
                     {
                         spike = Instantiate(blackSpike, transform);
                         spike.transform.position = new Vector3(500.0f, bottomMiddlePanel.GetComponent<LanePositions>().lowerCoord + 5, 0.0f);
-                        audioSource.PlayOneShot(synth.gNote, 1.0f);
+                        audioSource.PlayOneShot(synth.gNote, 0.1f);
                     }
                 }
                 break;
@@ -255,13 +282,13 @@ public class GameLogic : MonoBehaviour
                         spike = Instantiate(whiteSpike, transform);
                         spike.transform.Rotate(new Vector3(180, 0, 0));
                         spike.transform.position = new Vector3(500.0f, topMiddlePanel.GetComponent<LanePositions>().upperCoord - 5, 0.0f);
-                        audioSource.PlayOneShot(synth.dNote, 1.0f);
+                        audioSource.PlayOneShot(synth.dNote, 0.1f);
                     }
                     else
                     {
                         spike = Instantiate(whiteSpike, transform);
                         spike.transform.position = new Vector3(500.0f, topMiddlePanel.GetComponent<LanePositions>().lowerCoord + 5, 0.0f);
-                        audioSource.PlayOneShot(synth.bNote, 1.0f);
+                        audioSource.PlayOneShot(synth.bNote, 0.1f);
                     }
 
                 }
@@ -272,13 +299,13 @@ public class GameLogic : MonoBehaviour
                         spike = Instantiate(whiteSpike, transform);
                         spike.transform.Rotate(new Vector3(180, 0, 0));
                         spike.transform.position = new Vector3(500.0f, bottomPanel.GetComponent<LanePositions>().upperCoord - 5, 0.0f);
-                        audioSource.PlayOneShot(synth.gNote, 1.0f);
+                        audioSource.PlayOneShot(synth.gNote, 0.1f);
                     }
                     else
                     {
                         spike = Instantiate(whiteSpike, transform);
                         spike.transform.position = new Vector3(500.0f, bottomPanel.GetComponent<LanePositions>().lowerCoord + 5, 0.0f);
-                        audioSource.PlayOneShot(synth.eNote, 1.0f);
+                        audioSource.PlayOneShot(synth.eNote, 0.1f);
                     }
                 }
                 break;

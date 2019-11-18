@@ -9,7 +9,7 @@ public class synthesiser : MonoBehaviour
     float[] samples;
     public AudioClip aNote, bNote, cNote, dNote, eNote, fNote, gNote;
     float frequency;
-    float amplitude = 5000.0f;
+    float amplitude = 3.0f;
     // Start is called before the first frame update
     void Start()
     {

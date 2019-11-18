@@ -982,6 +982,10 @@ MonoBehaviour:
     type: 3}
   audioSource: {fileID: 825528390}
   synth: {fileID: 825528391}
+  BulletFire: {fileID: 8300000, guid: 7e042d6cd34a7e54ab32a3c9b22a70a6, type: 3}
+  PickupCrystal: {fileID: 8300000, guid: 6fa18b505b3274842b398f1296b7083b, type: 3}
+  GameOver: {fileID: 8300000, guid: e18fe3cfbca4809488456efe4daf5008, type: 3}
+  WallBreak: {fileID: 8300000, guid: f52a08c8b5f14b446ba8a61aacafbf40, type: 3}
   crystalPickup: {fileID: 2588192604096760548, guid: 0fa1a6eda5a35454cba04798c7ec22ef,
     type: 3}
   hazardSpawnTimer: 0
