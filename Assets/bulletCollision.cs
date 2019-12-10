@@ -10,6 +10,7 @@ public class bulletCollision : MonoBehaviour
         {
             if(other.gameObject.GetComponent<Hazard>().breakable == true)
             {
+                GameObject.FindObjectOfType<AudioSource>().PlayOneShot(GameObject.FindObjectOfType<GameLogic>().WallBreak, 1.0f);
                 other.gameObject.SetActive(false);
                 Destroy(other.gameObject);
             }

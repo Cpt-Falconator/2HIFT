@@ -52,7 +52,7 @@ public class GameLogic : MonoBehaviour
 
         for (int i = 0; i < samplesGO.Length; i++)
         {
-            samplesGO[i] *= 5.0f;
+            samplesGO[i] *= 3.0f;
         }
         GameOver.SetData(samplesGO, 0);
 

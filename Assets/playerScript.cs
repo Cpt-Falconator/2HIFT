@@ -164,6 +164,7 @@ public class playerScript : MonoBehaviour
             if (shotReady)
             {
                 Instantiate(bulletPrefab, transform.parent);
+                GameObject.FindObjectOfType<AudioSource>().PlayOneShot(GameObject.FindObjectOfType<GameLogic>().BulletFire, 1.0f);
                 SHOTCOOLDOWN = 3;
                 shotReady = false;
             }
